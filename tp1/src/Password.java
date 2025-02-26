@@ -1,5 +1,6 @@
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -93,10 +94,11 @@ public class Password {
      *         true if the password is strong, false otherwise
      */
     public static HashMap<String, Boolean> checkPasswordsList(ArrayList<String> passwords) {
-
-        // Code here
-
-        return null;
+        HashMap<String, Boolean> check = new HashMap<>();
+        for (String password :  passwords) {
+            check.put(password,isStrongPassword(password));
+        }
+        return check;
     }
 
     /**
@@ -112,10 +114,30 @@ public class Password {
      * @return A randomly generated password that meets the security criteria.
      */
     public static String generatePassword(int nbCar) {
+        if (nbCar <4) {
+            return null;          
+        }
+        String uppercase = "ABCDEFGHIJKLMNOPQRSTUVWZ";
+        String lowercase = "abcdefghijklmnopqrstuvwz";
+        String number = "0123456789";
+        String special = "@$£%*+=&#-_!?,./:§";
 
-        // Code here
+        List<String> password = new ArrayList<>();
+        SecureRandom random = new SecureRandom();
+        
+        password.add(uppercase.charAt(random.nextInt(27)));  
+        password.add(uppercase.charAt(random.nextInt(27))); 
+        password.add(number.charAt(random.nextInt(11)));   
+        password.add(special.charAt(random.nextInt(19))); 
 
-        return null;
+        while (password.size()< nbCar) {
+            password.add(uppercase.charAt(random.nextInt(27)));  
+            password.add(uppercase.charAt(random.nextInt(27))); 
+            password.add(number.charAt(random.nextInt(11)));   
+            password.add(special.charAt(random.nextInt(19)));      
+        }
+        Collections.shuffle(password);
+        return password.toString();
     }
 
     public static void main(String[] args) {
