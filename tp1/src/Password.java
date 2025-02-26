@@ -1,5 +1,6 @@
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -68,9 +69,19 @@ public class Password {
      */
     public static boolean isStrongPassword(String password) {
 
-        // Code here
-
-        return false;
+        Boolean bool = password.length() >= 12;
+        bool = bool && !password.toLowerCase().equals(password);
+        bool = bool && !password.toUpperCase().equals(password);
+        bool = bool && !password.contains(" ");
+        Boolean digit = false;
+        for (int i = 0; i < 10; i++) {
+            if (password.contains(i+"")) {
+                digit = true ;
+                break;              
+            } 
+        }
+        bool = bool && digit;
+        return bool;
     }
 
     /**
