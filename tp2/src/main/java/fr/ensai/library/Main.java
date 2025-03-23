@@ -14,5 +14,16 @@ public class Main {
                 423);
 
         System.out.println(fellowshipOfTheRing.toString());
+
+        Library library = new Library("ENSAI Biblio");
+        Magazine magazine = new Magazine("1234-5678", "The New Yorker", 1, 2019, 100);
+        Magazine magazine2 = new Magazine("1000-5678", "The ENSAI", 123, 1999, 20);
+        library.addIem(magazine);
+        library.addIem(magazine2);
+        library.loadBooksFromCSV("books.csv");
+        library.displayItems();
     }
+
+
+
 }
